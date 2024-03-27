@@ -1,0 +1,51 @@
+
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block style_head %}
+
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+
+{% endblock style_head %}
+{% block script_head %}
+
+{% endblock script_head %}
+
+{% block content %}
+<div class="global_form">
+    <h1>News:</h1>
+    {% for new in news %}
+    
+        <div class="container">
+            <div class="header_form">
+                <h2>
+                    <a href="{% url 'friend' new.user.new_user_link_url %}">
+                        {{ new.user.username }}
+                    </a>
+                </h2>
+                <p>{{ new.created_at }}</p>
+            </div>
+            <div>
+                <h3>{{ new.content}}</h3>
+                {% comment %} <div class="friend">
+                    <p>
+                        {{ f.friend.username }}
+                        <a onclick="sendJson({}, '{% url 'api__refuse_friend' f.friend.new_user_link_url %}', function(){window.location.reload()})">Supprimer</a>
+                    </p>
+                </div> {% endcomment %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
+
+{% block script_content %}
+<script src="/static/js/scanner.js"></script>
+
+<script>
+
+</script>
+
+{% endblock script_content %}

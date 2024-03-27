@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Raleway:wght@400;500;600;700;800&display=swap');
+
+$font-family-default: 'Raleway', serif;
+$font-family-title: 'Open Sans Condensed', sans-serif;
+$card-background-color: #fff;
+$card-border-color: #000;
+$card-image-background-color: #ffffff;
+$title-color: #2E5579;
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: $font-family-default;
+}
+
+@media screen and (min-width: 768px) {
+    
+    nav{
+        width: calc(100vw - 4rem);
+        height: 10vh;
+        background-color: #2E5579;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2rem;
+        h1 {
+            font-family: $font-family-title;
+            font-size: 3rem;
+            width:calc((100vw - 4rem) /2);
+
+        }
+        .details {
+            width:calc((100vw - 4rem) /2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: end;
+            height: 70%;
+            background-color: #2E5579;
+            color: #fff;
+            & > div {
+                display: flex;
+                align-items: center;
+                & > span {
+                    font-size: 1.5rem;
+                    margin-left: 1rem;
+                }
+            }
+        }
+    }
+
+    h2 {
+        font-family: $font-family-title;
+        font-size: 3rem;
+    }
+
+    .carousel{
+        padding: 10px;
+        margin: 0 auto;
+        max-height: calc(100vh - 10vh - 20px);
+        width: calc(100vw - 20px);
+        max-width: 1200px;
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        .book{
+            min-width: 300px;
+            max-width: 300px;
+            height: 400px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 5px 30px 0 rgb(0 0 0 / 10%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: $card-background-color;
+            border: 1px solid $card-border-color;
+            transition: ease all 0.3s;
+            &:hover {
+                transform: scale(1.05);
+            }
+            .saga{
+                font-size: 1.5rem;
+                font-weight: 600;
+                color: $title-color;
+                span{
+                    font-size: 1rem;
+                    font-weight: 400;
+                    color: $title-color;
+                }
+                .hors_serie{
+                    font-size: 1rem;
+                    font-weight: 400;
+                    color: red;
+                }
+            }
+        }
+    }
+
+
+    dialog {
+        // padding: 1rem 3rem;
+        background: white;
+        margin: auto;
+        width: 50vw;
+        min-width: 500px;
+        max-width: 1200px;
+        // height: 50vh;
+        // min-height: 500px;
+        // max-height: 1200px;
+        overflow: hidden;
+        padding-top: 2rem;
+        border-radius: 20px;
+        border: 0;
+        box-shadow: 0 5px 30px 0 rgb(0 0 0 / 10%);
+        animation: fadeIn 1s ease both;
+        &::backdrop {
+            animation: fadeIn 1s ease both;
+            background: rgb(255 255 255 / 40%);
+            z-index: 2;
+            backdrop-filter: blur(20px);
+        }
+        .x {
+            filter: grayscale(1);
+            border: none;
+            background: none;
+            position: absolute;
+            top: 15px;
+            right: 10px;
+            transition: ease filter, transform 0.3s;
+            cursor: pointer;
+            transform-origin: center;
+            &:hover {
+                filter: grayscale(0);
+                transform: scale(1.1);
+            }
+        }
+        h2 {
+            font-weight: 600;
+            font-size: 2rem;
+            padding-bottom: 1rem;
+        }
+        p, input {
+            font-size: 1rem;
+            line-height: 1.3rem;
+            margin: 1vh;
+            a {
+                &:visited {
+                    color: rgb(var(--vs-primary));
+                }
+            }
+        }
+        .scanner_container{
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            canvas, br{
+                display: none;
+            }
+
+        }
+    }
+}
+
+@media screen and (max-width:768px) {
+    body{
+        width: 100vw;
+        height: 100vh;
+        background-color: #2E5579;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+    }
+    nav, h2, .carousel, .card {
+        display: none;
+    }
+
+
+    dialog {
+        // padding: 1rem 3rem;
+        background: white;
+        margin: auto;
+        // height: 50vh;
+        // min-height: 500px;
+        // max-height: 1200px;
+        overflow: hidden;
+        padding-top: 2rem;
+        border-radius: 20px;
+        border: 0;
+        box-shadow: 0 5px 30px 0 rgb(0 0 0 / 10%);
+        animation: fadeIn 1s ease both;
+        &::backdrop {
+            animation: fadeIn 1s ease both;
+            background: rgb(255 255 255 / 40%);
+            z-index: 2;
+            backdrop-filter: blur(20px);
+        }
+        .x {
+            filter: grayscale(1);
+            border: none;
+            background: none;
+            position: absolute;
+            top: 15px;
+            right: 10px;
+            transition: ease filter, transform 0.3s;
+            cursor: pointer;
+            transform-origin: center;
+            &:hover {
+                filter: grayscale(0);
+                transform: scale(1.1);
+            }
+        }
+        h2 {
+            font-weight: 600;
+            font-size: 2rem;
+            padding-bottom: 1rem;
+        }
+        p, input {
+            font-size: 1rem;
+            line-height: 1.3rem;
+            margin: 1vh;
+            a {
+                &:visited {
+                    color: rgb(var(--vs-primary));
+                }
+            }
+        }
+        .scanner_container{
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            canvas, br{
+                display: none;
+            }
+
+        }
+    }
+    
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+

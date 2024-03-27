@@ -1,0 +1,158 @@
+
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block style_head %}
+
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+
+{% endblock style_head %}
+{% block script_head %}
+
+{% endblock script_head %}
+
+{% block content %}
+<div class="global_form">
+    <div class="container">
+        <div class="header_form">
+            <h2>Tous tes amis !</h2>
+        </div>
+        {% if friends %}
+            {% for type, friend in friends.items %}
+                {% if friend %}
+                
+                    <div>
+                        <h3>{{ type }}</h3>
+                        {% for f in friend %}
+                            <div class="friend">
+                                <p>
+                                    {{ f.friend.username }}
+                                    <a onclick="sendJson({}, '{% url 'api__refuse_friend' f.friend.new_user_link_url %}', function(){window.location.reload()})">Supprimer</a>
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p>Tu n'as pas d'amis... Mais tu peux en ajouter !</p>
+        {% endif %}
+    </div>
+    <div class="container">
+        <div class="header_form">
+            <h2>Toutes tes invitations d'amis recues</h2>
+        </div>
+        {% if all_invitations %}
+        
+            {% for friend in all_invitations %}
+                <div class="friend">
+                    <p>
+                        {{ friend.user.username }}
+                        <a onclick="sendJson({}, '{% url 'api__accept_friend' friend.user.new_user_link_url %}', function(){window.location.reload()})">Accepter</a>
+                        <a onclick="sendJson({}, '{% url 'api__refuse_friend' friend.user.new_user_link_url %}', function(){window.location.reload()})">Refuser</a>
+                    </p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Tu n'as pas d'invitations en attente</p>
+        {% endif %}
+
+    </div>
+    <div class="container">
+        <div class="header_form">
+            <h2>Ajouter un ami</h2> 
+            <p>Tu as deja des amis sur MyBookcase.online ? <br> Ajoute les ici pour pouvoir partager tes livres avec eux !</p>
+        </div>
+        <form id="add_friend" class="form">
+            
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="username">
+            <input type="submit" value="Create">
+
+        </form>          
+    </div>
+    <div class="container">
+        <div class="header_form">
+            <h2>Inviter un ami</h2>
+            <p>Vous souhaitez partager l'application avec vos amis ? <br> Rien de plus simple, entrez son adresse mail pour l'inviter sur MyBookcase.online ! <br> Vous pouvez inviter jsuque 3 amis({{ user.nb_added_friends }} / 3 amis invites)</p>
+            {% if user.nb_added_friends >= 3 %}
+                <p>Wow tu as deja invite trois amis ! Trop bien, tu pouras bientot en inviter plus...</p>
+            {% endif %}
+        </div>
+        
+        {% if user.nb_added_friends < 3 %}
+            <form id="invite_friend" class="form">
+                
+                {% csrf_token %}
+                {{ from__add_user.as_p }}
+                <input type="submit" value="Create">
+    
+            </form>
+        {% endif %}
+          
+    </div>
+    <div class="container">
+        <div class="header_form">
+            <h2>Mettre à jour votre username</h2>
+        </div> 
+        <form class="form" id="form_update_username">
+            {% csrf_token %}
+            {{ form__update_user__username.as_p }}
+            <input type="submit" value="Update">
+        </form>
+    </div>
+    <div class="container">
+        <div class="header_form">
+            <h2>Mettre à jour votre mot de passe</h2>
+        </div> 
+        <form class="form" id="form_update_password">
+            {% csrf_token %}
+            {{ form__update_user__password.as_p }}
+            <input type="submit" value="Update">
+        </form>
+    </div>
+    <div class="container">
+        <div class="header_form">
+            <h2>Mettre à jour votre email</h2>
+        </div> 
+        <form class="form" id="form_update_email">
+            {% csrf_token %}
+            {{ form__update_user__email.as_p }}
+            <input type="submit" value="Update">
+        </form>
+    </div>
+    <div class="container">
+        <div class="header_form">
+            <h2>Mettre à jour votre avatar</h2>
+        </div> 
+        <form class="form" enctype="multipart/form-data" id="form_update_avatar">
+            {% csrf_token %}
+            {{ form__update_user__avatar.as_p }}
+            <input type="submit" value="Update">
+        </form>
+    </div>
+    
+    
+   
+    
+    
+</div>
+
+{% endblock content %}
+
+{% block script_content %}
+<script src="/static/js/scanner.js"></script>
+
+<script>
+
+
+    form_to_json('#form_update_password', '{% url "api__update_user" %}', function(){window.location.reload()});
+    form_to_json('#form_update_email', '{% url "api__update_user" %}');
+    form_to_json('#form_update_avatar', '{% url "api__update_user" %}', function(){window.location.reload()});
+    form_to_json('#form_update_username', '{% url "api__update_user" %}');
+    form_to_json('#invite_friend', '{% url "api__add_user" %}', function(){window.location.reload()});
+    form_to_json('#add_friend', '{% url "api__add_friend" %}', function(){window.location.reload()});
+</script>
+
+{% endblock script_content %}

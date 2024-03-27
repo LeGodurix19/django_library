@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MyBookcase</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{% static "/css/style.css" %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div class="global_form">
+            <div class="container">
+                <div class="header_form">
+                    <h1>Connectez-vous</h1>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                </div>
+                <form method="POST" action="{% url 'login' %}" class="form">
+                    {% csrf_token %}
+                    <label for="username">Pseudo:</label>
+                    <input type="text" id="username" name="username" required><br><br>
+                    <label for="password">Mot de passe:</label>
+                    <input type="password" id="password" name="password" required><br><br>
+                    <input type="submit" value="Login">
+                </form>
+            </div>
+        </div>
+
+    </body>
+</html>

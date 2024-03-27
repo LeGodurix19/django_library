@@ -1,0 +1,24 @@
+<!-- FILEPATH: /Users/hugoorickx/Desktop/sdf/tmp_django/app/templates/login.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MyBookcase</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static "/css/style_login.css" %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <h1>Bienvenu sur MyBookcase.online !</h1>
+    <h2>Connectez-vous pour accéder à votre bibliothèque</h2>
+    {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+    <form method="POST" action="{% url "first_login" id_new_user %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Login">
+    </form>
+</body>
+</html>

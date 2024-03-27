@@ -1,0 +1,28 @@
+# Fichier .gitignore pour un projet Django
+
+# Ignorer les fichiers .DS_Store
+**/.DS_Store
+
+# Ignorer les fichiers de configuration de l'IDE
+.idea/
+.vscode/
+
+# Ignorer les fichiers de bytecode Python
+__pycache__/
+*.py[cod]
+
+# Ignorer les fichiers spécifiques à Django
+*.log
+*.pot
+*.pyc
+db.sqlite3
+media
+
+# Ignorer les fichiers spécifiques à l'environnement virtuel
+venv/
+*.env
+
+# Ignorer les fichiers de distribution Python
+dist/
+build/
+*.egg-info/

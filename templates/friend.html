@@ -1,0 +1,69 @@
+
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block style_head %}
+
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+
+{% endblock style_head %}
+{% block script_head %}
+
+
+{% endblock script_head %}
+
+{% block content %}
+    <h1 class="bibi">
+        <b>
+            Bibliothèque de {{ user.username }}:
+        </b>
+    </h1>
+    {% if message %}
+        <div class="message">
+            <p>{{ message }}</p>
+        </div>
+    {% endif %}
+    {% if error %}
+        <div class="error">
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
+    <div class="home">
+        <section>
+            {% for name, saga in books %}
+                {% if saga %}
+                    <div class="book_card" onclick="test('{%for tome in saga %}{{ tome }} {% endfor %}')">
+                {% else %}
+                    <div class="book_card" onclick="test('Livre unique')">
+
+                {% endif %}
+                    <h2>
+                        <b>
+                            <a href="{% url 'details' name %}">
+                                {{ name }}
+                            </a>
+                        </b>
+                    </h2>
+                </div>
+            {% endfor %}
+        </section>
+    </div>
+    
+{% endblock content %}
+
+{% block script_content %}
+
+    <script src="/static/js/scanner.js"></script>
+    <script>
+        function test(tome) {
+            {
+                Swal.fire({
+                    title: 'Liste de tomes',
+                    text: tome,
+                    confirmButtonText: 'OK'
+                })
+            }
+        }
+        </script>
+{% endblock script_content %}

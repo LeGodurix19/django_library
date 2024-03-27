@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style_head %}
+
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+{% endblock style_head %}
+{% block script_head %}
+
+{% endblock script_head %}
+{% block content %}
+    {% if books %}
+        <h1 class="bibi">
+            {{ saga.name }}
+        </h1>
+    {% endif %}
+    {% if book %}
+        <h1 class="bibi">
+            {{ book.book.title }}
+        </h1>
+    {% endif %}
+    <div class="details_book">
+        <div class="books_list">
+        {% if books %}
+                {% for book in books %}
+                    <div class="book">
+                        <h2>
+                            {{ book.book.tome }}
+                        </h2>
+                        <p>
+                            {{ book.book.name }}
+                        </p>
+                        <form method="post"  action="{% url "api__update_book__status" %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="bc" value="{{ book.book.isbn }}">
+                            <select id="status" name="status">
+                                <option value="A lire" {% if book.status == "A lire" %}selected{% endif %}>A lire</option>
+                                <option value="En cours" {% if book.status == "En cours" %}selected{% endif %}>En cours</option>
+                                <option value="Lu" {% if book.status == "Lu" %}selected{% endif %}>Lu</option>
+                                <option value="Abandonné" {% if book.status == "Abandonné" %}selected{% endif %}>Abandonné</option>
+                            </select>
+                            <input type="submit" value="Update">
+                        </form>
+                    </div>
+                {% endfor %}
+        {% endif %}
+        {% if book %}
+            <div class="book">
+                
+                <form id="form">
+                    {% csrf_token %}
+                    <input type="hidden" name="bc" value="{{ book.book.isbn }}">
+                    <select id="status" name="status">
+                        <option value="A lire" {% if book.status == "A lire" %}selected{% endif %}>A lire</option>
+                        <option value="En cours" {% if book.status == "En cours" %}selected{% endif %}>En cours</option>
+                        <option value="Lu" {% if book.status == "Lu" %}selected{% endif %}>Lu</option>
+                        <option value="Abandonné" {% if book.status == "Abandonné" %}selected{% endif %}>Abandonné</option>
+                    </select>
+                    <input type="submit" value="Update">
+                </form>
+            </div>
+        
+        {% endif %}
+        </div>
+
+    </div>
+
+{% endblock content %}
+{% block script_content %}
+
+    <script src="/static/js/scanner.js"></script>
+    <script>
+        form_to_json('form', '{% url "api__update_book__status" %}')
+    </script>
+
+{% endblock script_content %}

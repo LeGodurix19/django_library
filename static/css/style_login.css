@@ -1,0 +1,222 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Raleway:wght@400;500;600;700;800&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Raleway", serif;
+}
+
+@media screen and (min-width: 768px) {
+  nav {
+    width: calc(100vw - 4rem);
+    height: 10vh;
+    background-color: #2E5579;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+  }
+  nav h1 {
+    font-family: "Open Sans Condensed", sans-serif;
+    font-size: 3rem;
+    width: calc((100vw - 4rem) / 2);
+  }
+  nav .details {
+    width: calc((100vw - 4rem) / 2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+    height: 70%;
+    background-color: #2E5579;
+    color: #fff;
+  }
+  nav .details > div {
+    display: flex;
+    align-items: center;
+  }
+  nav .details > div > span {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+  }
+  h2 {
+    font-family: "Open Sans Condensed", sans-serif;
+    font-size: 3rem;
+  }
+  .carousel {
+    padding: 10px;
+    margin: 0 auto;
+    max-height: calc(90vh - 20px);
+    width: calc(100vw - 20px);
+    max-width: 1200px;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .carousel .book {
+    min-width: 300px;
+    max-width: 300px;
+    height: 400px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #000;
+    transition: ease all 0.3s;
+  }
+  .carousel .book:hover {
+    transform: scale(1.05);
+  }
+  .carousel .book .saga {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2E5579;
+  }
+  .carousel .book .saga span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #2E5579;
+  }
+  .carousel .book .saga .hors_serie {
+    font-size: 1rem;
+    font-weight: 400;
+    color: red;
+  }
+  dialog {
+    background: white;
+    margin: auto;
+    width: 50vw;
+    min-width: 500px;
+    max-width: 1200px;
+    overflow: hidden;
+    padding-top: 2rem;
+    border-radius: 20px;
+    border: 0;
+    box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease both;
+  }
+  dialog::backdrop {
+    animation: fadeIn 1s ease both;
+    background: rgba(255, 255, 255, 0.4);
+    z-index: 2;
+    -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+  }
+  dialog .x {
+    filter: grayscale(1);
+    border: none;
+    background: none;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    transition: ease filter, transform 0.3s;
+    cursor: pointer;
+    transform-origin: center;
+  }
+  dialog .x:hover {
+    filter: grayscale(0);
+    transform: scale(1.1);
+  }
+  dialog h2 {
+    font-weight: 600;
+    font-size: 2rem;
+    padding-bottom: 1rem;
+  }
+  dialog p, dialog input {
+    font-size: 1rem;
+    line-height: 1.3rem;
+    margin: 1vh;
+  }
+  dialog p a:visited, dialog input a:visited {
+    color: rgb(var(--vs-primary));
+  }
+  dialog .scanner_container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+  dialog .scanner_container canvas, dialog .scanner_container br {
+    display: none;
+  }
+}
+@media screen and (max-width: 768px) {
+  body {
+    width: 100vw;
+    height: 100vh;
+    background-color: #2E5579;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  nav, h2, .carousel, .card {
+    display: none;
+  }
+  dialog {
+    background: white;
+    margin: auto;
+    overflow: hidden;
+    padding-top: 2rem;
+    border-radius: 20px;
+    border: 0;
+    box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease both;
+  }
+  dialog::backdrop {
+    animation: fadeIn 1s ease both;
+    background: rgba(255, 255, 255, 0.4);
+    z-index: 2;
+    -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+  }
+  dialog .x {
+    filter: grayscale(1);
+    border: none;
+    background: none;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    transition: ease filter, transform 0.3s;
+    cursor: pointer;
+    transform-origin: center;
+  }
+  dialog .x:hover {
+    filter: grayscale(0);
+    transform: scale(1.1);
+  }
+  dialog h2 {
+    font-weight: 600;
+    font-size: 2rem;
+    padding-bottom: 1rem;
+  }
+  dialog p, dialog input {
+    font-size: 1rem;
+    line-height: 1.3rem;
+    margin: 1vh;
+  }
+  dialog p a:visited, dialog input a:visited {
+    color: rgb(var(--vs-primary));
+  }
+  dialog .scanner_container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+  dialog .scanner_container canvas, dialog .scanner_container br {
+    display: none;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}/*# sourceMappingURL=style_login.css.map */

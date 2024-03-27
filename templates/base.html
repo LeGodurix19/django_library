@@ -1,0 +1,54 @@
+
+{% load static %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mybookcase</title>
+  {% block style_head %}
+  
+  {% endblock style_head %}
+  {% block script_head %}
+  
+  {% endblock script_head %}
+  <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    {% csrf_token %} 
+    <nav>
+        <h1><a href="/">My bookcase</a></h1>
+        <div class="details">
+            <div>
+                <a href="/friends/" title="Actualités">
+                    <img width="25" height="25" src="https://img.icons8.com/laces/64/user-group-man-man.png" alt="user-group-man-man"/>
+                </a>
+                <a href="/accounts/params/" title="Paramètres">
+                    {% if user.avatar %}
+                        <img src="{% static user.avatar %}" alt="account">                   
+                    {% else %}
+                        <img src="{% static 'img/account.svg' %}" alt="account">
+                    {% endif %}
+                </a>
+                <a href="/add/" title="Ajouter un livre">
+                    <img src="{% static 'img/plus.svg' %}" alt="account">
+                </a>
+                <a href="/accounts/logout/" title="Déconnexion">
+                    <img src="{% static 'img/logout.svg' %}" alt="account">
+                </a>
+            </div>
+            
+        </div>
+    </nav>
+    {% block content %}
+    
+    {% endblock content %}
+
+    <script src="/static/js/scanner.js"></script>
+    {% block script_content %}
+    
+    {% endblock script_content %}
+</body>
+</html>
